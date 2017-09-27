@@ -10,21 +10,36 @@
  * and open the template in the editor.
  */
 include('../smarty/libs/Smarty.class.php');
-require_once 'Post.php';
+
 // create object
-$smarty = new Smarty; 
+$smarty = new Smarty;  
+
 $uid=$_GET['id'];
+require '../RedBeanPHP4_3_4/rb.php';
+require 'connect.php';
+R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD); 
+$query= 'SELECT * FROM user WHERE id ="'.$uid.'"';
+$user=R::getRow($query);
+
+$smarty->assign('Name', $user['username']);
 $smarty->assign('url', 'insertNew.php?id='.$uid);
 
 if(isset($_POST['insertNewpost0']))
 { 
     $subject=$_POST['subject0'];
     $post_content=$_POST['post0'];
-     if(!empty($subject) &&  !empty($post_content))
+     if($subject!= "" &&  $post_content!="")
     {  
-    $post = new Post($subject,$post_content,$uid);   
-    $post->addNewPost();
-    header("Location:main.php?id=".$uid);     
+         
+     $post = R::dispense( 'posts' );
+     
+    $post->subject = $subject;
+    $post->post =  $post_content;
+    $post->uid = $uid;
+    print_r($post);
+    $idi = R::store( $post );
+    header("Location:main.php?id=".$uid);
+         
     }
     else
     {

@@ -22,7 +22,7 @@ and open the template in the editor.
     <body>
     <center> 
         <form  action={$url} method="post" >
-            <h1> Insert your new post here .. </h1>          
+            <h1> {$Name}, Insert your new post here .. </h1>          
             <input type='text' id='subject' name='subject0'/> </br> </br>
             <textarea id='post' name='post0' ></textarea> </br>
             <input type='submit' id='inserNewpost' name='insertNewpost0' value='Insert New Post'/>
