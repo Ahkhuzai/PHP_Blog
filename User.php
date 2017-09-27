@@ -16,18 +16,17 @@ class User {
 var $Username;
 var $Password;
 var $Email;
-    var $ID;
+var $ID;
     
    
     function __construct($usrname,$usrpass) {
-    require '../RedBeanPHP4_3_4/rb.php';
-    require 'connect.php';
-    R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD);
-    $this->Username=$usrname; 
-    $this->Password=$usrpass; 
-    
+        require '../RedBeanPHP4_3_4/rb.php';
+        require 'connect.php';
+        R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD);             
+        $this->Username=$usrname; 
+        $this->Password=$usrpass; 
     }
-
+    
     function validateData()
     {
         
@@ -46,14 +45,14 @@ var $Email;
       
     }
     
-    function addNewUser()
+    function addNewUser($username,$password,$email)
     {
-       $user = R::dispense( 'user' );
-       $user->username = $this->Username;
-       $user->userpassword = $this->Password;
-       $user->useremail = $this->Email;
-       $this->ID = R::store( $user );
-       
+       $usero = R::dispense( 'user' );
+       $usero->username = $username;
+       $usero->userpassword = $password;
+       $usero->useremail = $email;
+       $this->ID = R::store( $usero );
+       return $this->ID;
     }
     
     function ValidEmail($email)
@@ -66,14 +65,14 @@ var $Email;
             return true;    
     }   
     
-    function neverUsedEmail($username,$column_name)
+    function neverUsedEmail($email)
     {
         
-        $allusrnames= R::getAll( 'SELECT email FROM user' );
+        $allemails= R::getAll( 'SELECT email FROM user' );
         
-        for($i=0;$i<count($allusrnames);$i++)
+        for($i=0;$i<count($allemails);$i++)
         {
-           if($username===$allusrnames[$i][$column_name])
+           if($email===$allemails[$i]['email'])
            {
            echo "<script> alert('This Email is used before! ')</script>";
            return false;
@@ -89,9 +88,9 @@ var $Email;
         
         for($i=0;$i<count($allusrnames);$i++)
         {
-           if($username===$allusrnames[$i][$column_name])
+           if($username===$allusrnames[$i]['username'])
           {
-            echo "<script> alert('This username is used before! ')</script>";
+            echo "<script> alert('This Username is used before! ')</script>";
             return false;
            }
         }
@@ -99,12 +98,8 @@ var $Email;
         return true;
     }
     
-  /*  function getUserName($uid)
-    {
-        $query= 'SELECT * FROM user WHERE id ="'.$uid.'"';
-        $user=R::getRow($query);
-        $this->Username=$user['username'];
-        return $user['username'];
-    }*/
+
+    
+    
     }
 ?>

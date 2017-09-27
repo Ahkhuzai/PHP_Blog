@@ -10,23 +10,23 @@
  * and open the template in the editor.
  */
 include('../smarty/libs/Smarty.class.php');
+require_once 'Post.php';
 
 // create object
-$smarty = new Smarty;  
+$smarty = new Smarty; 
+$post=new Post(NULL, NULL, NULL);
 
 $pid=$_GET['pid'];
 $uid=$_GET['uid'];
 
-require '../RedBeanPHP4_3_4/rb.php';
-require 'connect.php';
-R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD); 
-$query= 'SELECT * FROM posts WHERE id ="'.$pid.'"';
-$post=R::getRow($query);
+$post->ID=$pid;
+$post->writer_ID=$uid;
 
+$PostToUpdate=$post->loadPost($pid);
 
-$smarty->assign('subject',$post['subject']);
+$smarty->assign('subject',$PostToUpdate['subject']);
 
-$smarty->assign('post', $post['post']);
+$smarty->assign('post', $PostToUpdate['post']);
 
 $smarty->assign('url', 'update.php?pid='.$pid.'&uid='.$uid);
 
@@ -34,11 +34,12 @@ if(isset($_POST['updatepost0']))
 { 
     $subject=$_POST['subject0'];
     $post_content=$_POST['post0'];
+    
      if($subject!= "" &&  $post_content!="")
     {  
-		$query='UPDATE posts SET subject="'.$subject.'", post="'.$post_content.'" WHERE id ='.$pid;
-         R::exec( $query );
-    header("Location:main.php?id=".$uid);        
+        $post->UpdatePost($subject,$post_content);
+        
+        header("Location:main.php?id=".$uid);        
     }
     else
     {

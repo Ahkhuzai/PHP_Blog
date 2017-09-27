@@ -49,7 +49,7 @@ class Post {
     }
     function UpdatePost($subject,$post_content)
     {
-        echo $query='UPDATE posts SET subject="'.$subject.'", post="'.$post_content.'" WHERE uid ='.$this->writer_ID;
+        echo $query='UPDATE posts SET subject="'.$subject.'", post="'.$post_content.'" WHERE id ='.$this->ID;
         $r=R::exec( $query );
         return $r;   
     }
