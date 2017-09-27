@@ -21,7 +21,7 @@ and open the template in the editor.
     </head>
     <body>
     <center> 
-  <form  action="http://localhost/smarty/PHPBlog/newUser.php" method="post" >
+  <form  action="newUser.php" method="post" >
             <input type="text" id="usrname" name="usrname0" class="inputFromusr"/>
             </br>
             </br>
