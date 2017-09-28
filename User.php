@@ -43,9 +43,10 @@ var $ID;
             }
         }
         else
-          echo '<script>alert("There are problem with db connection!")</script>';
-         
-      
+        {
+            echo '<script>alert("There are problem with db connection!")</script>';       
+            return false;
+        }
     }
     
     function addNewUser($username,$password,$email)
@@ -71,7 +72,10 @@ var $ID;
             else return false; 
         }
         else
-          echo '<script>alert("There are problem with db connection!")</script>'; 
+        {
+            echo '<script>alert("There are problem with db connection!")</script>';       
+            return false;
+        }
     }
     
     function ValidEmail($email)
@@ -86,7 +90,10 @@ var $ID;
                 return true; 
         }
         else
-          echo '<script>alert("There are problem with db connection!")</script>'; 
+        {
+            echo '<script>alert("There are problem with db connection!")</script>';       
+            return false;
+        }
     }   
     
     function neverUsedEmail($email)
@@ -108,7 +115,10 @@ var $ID;
             return true;
         }
         else
-          echo '<script>alert("There are problem with db connection!")</script>'; 
+        {
+            echo '<script>alert("There are problem with db connection!")</script>';       
+            return false;
+        }
     }
     
     function neverUsedUsername($username)
@@ -131,7 +141,10 @@ var $ID;
         } 
         
         else
-          echo '<script>alert("There are problem with db connection!")</script>';
+        {
+            echo '<script>alert("There are problem with db connection!")</script>';       
+            return false;
+        }
     }
 }
 ?>

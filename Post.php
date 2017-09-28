@@ -41,55 +41,64 @@ class Post {
                 return false;
         }
         else
-          echo '<script>alert("There are problem with db connection!")</script>';
-           
+        {
+            echo '<script>alert("There are problem with db connection!")</script>';       
+            return false;
+        }
     }
     function loadPost($pid)
     {    
         if($isConnected = R::testConnection())
         {
-        $query= 'SELECT * FROM posts WHERE id ="'.$pid.'"';
-        $post=R::getRow($query); 
-        R::close();
-        $this->writer_ID=$post['uid'];
-        if($post)
-            return $post;
-        else 
-            return false;
+            $query= 'SELECT * FROM posts WHERE id ="'.$pid.'"';
+            $post=R::getRow($query); 
+            R::close();
+            $this->writer_ID=$post['uid'];
+            if($post)
+                return $post;
+            else 
+                return false;
         }
         else
-          echo '<script>alert("There are problem with db connection!")</script>';
-          
+        {
+            echo '<script>alert("There are problem with db connection!")</script>';       
+            return false;
+        }
     }
     function UpdatePost($subject,$post_content)
     {
         if($isConnected = R::testConnection())
         {
-        $query='UPDATE posts SET subject="'.$subject.'", post="'.$post_content.'" WHERE id ='.$this->ID;
-        $r=R::exec( $query );
-        if($r)
-            return $r;   
-        else 
-            return false;
+            $query='UPDATE posts SET subject="'.$subject.'", post="'.$post_content.'" WHERE id ='.$this->ID;
+            $r=R::exec( $query );
+            if($r)
+                return $r;   
+            else 
+                return false;
         }
         else
-          echo '<script>alert("There are problem with db connection!")</script>';
+        {
+            echo '<script>alert("There are problem with db connection!")</script>';       
+            return false;
+        }
     }
     
     function DeletePost($pid)
     {
         if($isConnected = R::testConnection())
         {
-        $query='delete from posts WHERE id ='.$this->ID;
-        $r=R::exec( $query );
-        if($r)
-            return $r;   
-        else 
+            $query='delete from posts WHERE id ='.$this->ID;
+            $r=R::exec( $query );
+            if($r)
+                return $r;   
+            else 
+                return false;
+        }
+         else
+        {
+            echo '<script>alert("There are problem with db connection!")</script>';       
             return false;
         }
-        else
-          echo '<script>alert("There are problem with db connection!")</script>';
-        
     }
     
     function loadAllPost($uid)
@@ -117,10 +126,11 @@ class Post {
         else 
             return false;
         }
-        else
-          echo '<script>alert("There are problem with db connection!")</script>';
-        
-       
+         else
+        {
+            echo '<script>alert("There are problem with db connection!")</script>';       
+            return false;
+        } 
     }
 }
 
