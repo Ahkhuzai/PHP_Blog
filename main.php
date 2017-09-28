@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-include('../smarty/libs/Smarty.class.php');
+include('Asest/Config/smarty/libs/Smarty.class.php');
 require_once 'Post.php';
 
 $uid=$_GET['id'];
@@ -13,7 +13,7 @@ $uid=$_GET['id'];
 // create object
 $smarty = new Smarty; 
 
-$smarty->assign('Name', $username);
+//$smarty->assign('Name', $username);
 $smarty->assign('url', 'insertNew.php?id='.$uid);
 
 $post=new Post(NULL, NULL, NULL);

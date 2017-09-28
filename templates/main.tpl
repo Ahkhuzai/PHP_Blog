@@ -21,7 +21,7 @@ and open the template in the editor.
     </head>
     <body>
     <center> 
-        <h1> Welcome {$Name} to your Blog </h1>
+        <h1> Welcome to your Blog </h1>
         <form  action={$url} method="post" >
              <input type='submit' id='inserNew' name='insertNew0' value='Insert New Post'/>
         </form>
@@ -31,8 +31,9 @@ and open the template in the editor.
  <hr>		
               <h1>{$post.subject}</h1>      
               <p>{$post.post}</p>
-			 
-			  <a href={$post.url}> To Update this post .. </a>
+		<a href={$post.url_update}> To Update this post .. </a>
+                </br>
+                <a href={$post.url_delete}> To Delete this post .. </a>
 			 
         {/strip}
         {/foreach}

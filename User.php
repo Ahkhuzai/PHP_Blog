@@ -20,7 +20,7 @@ var $ID;
     
    
     function __construct($usrname,$usrpass) {
-        require '../RedBeanPHP4_3_4/rb.php';
+        require 'Asest/Config/RedBeanPHP4_3_4/rb.php';
         require 'connect.php';
         R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD);             
         $this->Username=$usrname; 

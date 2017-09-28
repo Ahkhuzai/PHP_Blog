@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 $DBUSERNAME="root";
-$DBPASSWORD="root";
+$DBPASSWORD="";
 $DBNAME="blog_orm";
 
 ?>

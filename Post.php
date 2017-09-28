@@ -19,7 +19,7 @@ class Post {
     var $writer_ID; 
     
     function __construct($subject,$content,$uid) {
-        require '../RedBeanPHP4_3_4/rb.php';
+        require 'Asest/Config/RedBeanPHP4_3_4/rb.php';
         require 'connect.php';
         R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD);     
         $this->subject=$subject;
@@ -49,7 +49,14 @@ class Post {
     }
     function UpdatePost($subject,$post_content)
     {
-        echo $query='UPDATE posts SET subject="'.$subject.'", post="'.$post_content.'" WHERE id ='.$this->ID;
+        $query='UPDATE posts SET subject="'.$subject.'", post="'.$post_content.'" WHERE id ='.$this->ID;
+        $r=R::exec( $query );
+        return $r;   
+    }
+    
+    function DeletePost($pid)
+    {
+        echo $query='delete from posts WHERE id ='.$this->ID;
         $r=R::exec( $query );
         return $r;   
     }
@@ -69,7 +76,8 @@ class Post {
         $post_data=array();
         for($i=0;$i<count($subjects);$i++)
         {
-            $post_data[$i]=array('subject'=>$subjects[$i] , 'post'=>$posts[$i],'url'=>'update.php?pid='.$ids[$i].'&uid='.$uid);
+            $post_data[$i]=array('subject'=>$subjects[$i] , 'post'=>$posts[$i],
+                'url_update'=>'update.php?pid='.$ids[$i].'&uid='.$uid,'url_delete'=>'delete.php?pid='.$ids[$i].'&uid='.$uid);
         }
         return $post_data;
     }

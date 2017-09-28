@@ -9,7 +9,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-include('../smarty/libs/Smarty.class.php');
+include('Asest/Config/smarty/libs/Smarty.class.php');
 require_once 'Post.php';
 
 // create object

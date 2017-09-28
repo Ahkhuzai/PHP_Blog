@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-09-27 07:00:20
+/* Smarty version 3.1.30, created on 2017-09-28 06:06:02
   from "C:\MAMP\htdocs\MyCopy\templates\main.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59cb4c84b3c085_62812254',
+  'unifunc' => 'content_59cc914a42fc84_93057196',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '89ceb3ad6462821b6d0b53c10ca8069cf99653e9' => 
     array (
       0 => 'C:\\MAMP\\htdocs\\MyCopy\\templates\\main.tpl',
-      1 => 1506495610,
+      1 => 1506578738,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59cb4c84b3c085_62812254 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59cc914a42fc84_93057196 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <!--
@@ -69,8 +69,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['post']->value) {
 ?>      
         <hr><h1><?php echo $_smarty_tpl->tpl_vars['post']->value['subject'];?>
 </h1><p><?php echo $_smarty_tpl->tpl_vars['post']->value['post'];?>
-</p><a href=<?php echo $_smarty_tpl->tpl_vars['post']->value['url'];?>
-> To Update this post .. </a>
+</p><a href=<?php echo $_smarty_tpl->tpl_vars['post']->value['url_update'];?>
+> To Update this post .. </a></br><a href=<?php echo $_smarty_tpl->tpl_vars['post']->value['url_delete'];?>
+> To Delete this post .. </a>
         <?php
 }
 }

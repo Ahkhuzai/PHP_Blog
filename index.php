@@ -1,5 +1,5 @@
 <?php
-include('../smarty/libs/Smarty.class.php');
+include('Asest/Config/smarty/libs/Smarty.class.php');
 require_once("User.php");
 // create object
 $smarty = new Smarty; 
