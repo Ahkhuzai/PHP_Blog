@@ -19,87 +19,119 @@ var $Email;
 var $ID;
     
    
-    function __construct($usrname,$usrpass) {
-        require 'Asest/Config/RedBeanPHP4_3_4/rb.php';
+    function __construct($usrname,$usrpass) {  
         require 'connect.php';
-        R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD);             
         $this->Username=$usrname; 
         $this->Password=$usrpass; 
     }
     
     function validateData()
     {
-        
-        $query= 'SELECT * FROM user WHERE username ="'.$this->Username.'"';
-        $user=R::getRow($query);                              
-        if($user['userpassword']==$this->Password)           
+        if($isConnected = R::testConnection())
         {
-            $this->ID=$user['id'];
-            $this->Email=$user['email']; 
-            return true; 
+            $query= 'SELECT * FROM user WHERE username ="'.$this->Username.'"';
+            $user=R::getRow($query);                              
+            if($user['userpassword']==$this->Password)           
+            {
+                $this->ID=$user['id'];
+                $this->Email=$user['email']; 
+                return true; 
+            }
+            else {
+                echo '<script>alert("username and password combinaation does not match our recored!")</script>';
+                return false;
+            }
         }
-        else {
-            echo '<script>alert("username and password combinaation does not match our recored!")</script>';
-            return false;
-        }
+        else
+          echo '<script>alert("There are problem with db connection!")</script>';
+         
       
     }
     
     function addNewUser($username,$password,$email)
     {
-       $usero = R::dispense( 'user' );
-       $usero->username = $username;
-       $usero->userpassword = $password;
-       $usero->useremail = $email;
-       $this->ID = R::store( $usero );
-       return $this->ID;
+        if($isConnected = R::testConnection())
+        {
+            if($this->neverUsedEmail($email)&& $this->neverUsedUsername($username))
+
+                if($this->ValidEmail($email))
+                {
+                    $this->Email=$email;
+                    $usero = R::dispense( 'user' );
+                    $usero->username = $username;
+                    $usero->userpassword = $password;
+                    $usero->useremail = $email;
+                    $this->ID = R::store( $usero );
+                    if($this->ID)
+                        return $this->ID;
+                    else 
+                        return false; 
+                } 
+                else return false;
+            else return false; 
+        }
+        else
+          echo '<script>alert("There are problem with db connection!")</script>'; 
     }
     
     function ValidEmail($email)
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
-        { 
-            return false;
+        if($isConnected = R::testConnection())
+        {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+            { 
+                return false;
+            }
+            else 
+                return true; 
         }
-        else 
-            return true;    
+        else
+          echo '<script>alert("There are problem with db connection!")</script>'; 
     }   
     
     function neverUsedEmail($email)
     {
         
-        $allemails= R::getAll( 'SELECT email FROM user' );
-        
-        for($i=0;$i<count($allemails);$i++)
+        if($isConnected = R::testConnection())
         {
-           if($email===$allemails[$i]['email'])
-           {
-           echo "<script> alert('This Email is used before! ')</script>";
-           return false;
-           }
-        }
+            $allemails= R::getAll( 'SELECT useremail FROM user' );
+
+            for($i=0;$i<count($allemails);$i++)
+            {
+               if($email===$allemails[$i]['useremail'])
+               {
+               echo "<script> alert('This Email is used before! ')</script>";
+               return false;
+               }
+            }
         
-        return true;
+            return true;
+        }
+        else
+          echo '<script>alert("There are problem with db connection!")</script>'; 
     }
+    
     function neverUsedUsername($username)
     {
         
-        $allusrnames= R::getAll( 'SELECT username FROM user' );
-        
-        for($i=0;$i<count($allusrnames);$i++)
+        if($isConnected = R::testConnection())
         {
-           if($username===$allusrnames[$i]['username'])
-          {
-            echo "<script> alert('This Username is used before! ')</script>";
-            return false;
-           }
-        }
-        
-        return true;
-    }
-    
+            $allusrnames= R::getAll( 'SELECT username FROM user' );
 
-    
-    
+            for($i=0;$i<count($allusrnames);$i++)
+            {
+               if($username===$allusrnames[$i]['username'])
+              {
+                echo "<script> alert('This Username is used before! ')</script>";
+                return false;
+               }
+            }
+
+            return true;
+        } 
+        
+        else
+          echo '<script>alert("There are problem with db connection!")</script>';
     }
+}
 ?>

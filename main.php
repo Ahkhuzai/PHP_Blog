@@ -13,13 +13,15 @@ $uid=$_GET['id'];
 // create object
 $smarty = new Smarty; 
 
-//$smarty->assign('Name', $username);
 $smarty->assign('url', 'insertNew.php?id='.$uid);
 
 $post=new Post(NULL, NULL, NULL);
+$post_data=array();
 $post_data=$post->loadAllPost($uid);
 
-$smarty->assign('posts', $post_data);
+if($post_data)
+    $smarty->assign('posts', $post_data);
+
 
 
 $smarty->display('main.tpl');

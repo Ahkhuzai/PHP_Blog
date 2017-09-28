@@ -9,5 +9,8 @@ $DBUSERNAME="root";
 $DBPASSWORD="";
 $DBNAME="blog_orm";
 
+require 'Asest/Config/RedBeanPHP4_3_4/rb.php';
+R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD);           
+
 ?>
 
