@@ -16,21 +16,19 @@ and open the template in the editor.
         <link rel="stylesheet" href="Assist/Config/jqwidgets-ver5.3.2/jqwidgets/styles/jqx.base.css" type="text/css" />
         <link rel="stylesheet" href="Assist/Config/jqwidgets-ver5.3.2/jqwidgets/styles/jqx.energyblue.css" type="text/css" />
         <script type="text/javascript" src="Assist/Config/jqwidgets-ver5.3.2/jqwidgets/jqxinput.js"></script>
-        <script type="text/javascript" src="Assist/js/main.js"></script>
+        <script type="text/javascript" src="Assist/js/NewPost.js"></script>
         <title>PHP Blog</title>
     </head>
     <body>
     <center> 
-        <form  action="index.php" method="post" >
-            <input type="text" id="usremail" name="usremail0"/>
-            </br>
-            </br>
-            <input type="password" id="usrpass" name="usrpass0"/>
-            </br>
-            </br>
-            <input type="submit" value="Login"  name = "login" id='login' class='btn'/> 
-            <input type="submit" value="New User" name = "signup" id='signup' class='btn'/>
-            </form>
+        <form  action="NewPost.php" method="post" >
+            <h1> Insert your new post here .. </h1>          
+            <input type='text' id='subject' name='subject0'/> </br> </br>
+            <textarea id='post' name='post0' ></textarea> </br>
+            <input type='submit' id='inserNewpost' name='inserNewpost0' value='Insert New Post'/>
+            </hr>
+        </form>
     </center>
     </body>
 </html>
+

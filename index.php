@@ -1,31 +1,36 @@
 <?php
-include('Asest/Config/smarty/libs/Smarty.class.php');
-require_once("User.php");
+include('Assist/Config/smarty/libs/Smarty.class.php');
+require 'User.php';
 // create object
 $smarty = new Smarty; 
- 
 
-       if(isset($_POST['login']))
-       {   
-           $usrname=$_POST['usrname0'];
-           $usrpass= $_POST['usrpass0'];
-           if(!empty($usrpass) && !empty($usrname))
-           {   
-               $user = new User($usrname,$usrpass);
-             
-               if($user->validateData())
-               {
-                    $id=$user->ID;
-                    header("Location:main.php?id=".$id);
-               }
-           }
-           else 
-               echo '<script>alert("Please fill in all required information !")</script>';
-       }
-       else if(isset($_POST['signup']))
-           header("Location: newUser.php");
-       
-///////////////////////////////////////////////////////////////
-       
+if(isset($_POST['login']))
+{
+    if(!empty($_POST['usrpass0']) && !empty($_POST['usremail0']))
+    {
+        $email= $_POST['usremail0'];
+        $password=$_POST['usrpass0'];
+        
+        $user = new User($email,$password);
+        $result=$user->validate($email,$password);
+        
+        if($result)
+        {
+            session_start();
+            $_SESSION['userId']= $result;
+            header("Location:main.php");
+        }
+        else 
+            echo "<script> alert('The email and password combination does not match our records!')</script>";
+        
+    }
+}
+
+if(isset($_POST['signup']))
+{
+    header("Location:signup.php");
+}
+
 $smarty->display('index.tpl');
+
 ?>

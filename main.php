@@ -5,24 +5,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-include('Asest/Config/smarty/libs/Smarty.class.php');
+include('Assist/Config/smarty/libs/Smarty.class.php');
 require_once 'Post.php';
 
-$uid=$_GET['id'];
+//$uid=$_GET['id'];
 
 // create object
 $smarty = new Smarty; 
+$smarty->assign('url', 'main.php');
+session_start();
+$usrID= $_SESSION['userId'];
 
-$smarty->assign('url', 'insertNew.php?id='.$uid);
-
-$post=new Post(NULL, NULL, NULL);
+$post = new Post(NULL,NULL,Null);
 $post_data=array();
-$post_data=$post->loadAllPost($uid);
+$post_data=$post->loadAllPost($usrID);
 
 if($post_data)
     $smarty->assign('posts', $post_data);
+else 
+    $smarty->assign('msg',"You have not post anything yet"); 
 
 
+if(isset($_POST['insertNew0']))
+    header ("Location:NewPost.php");
+if(isset($_POST['EditPost0']))
+    header ("Location:EditPost.php");
 
 $smarty->display('main.tpl');
 ?>

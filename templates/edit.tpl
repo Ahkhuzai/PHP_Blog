@@ -16,21 +16,20 @@ and open the template in the editor.
         <link rel="stylesheet" href="Assist/Config/jqwidgets-ver5.3.2/jqwidgets/styles/jqx.base.css" type="text/css" />
         <link rel="stylesheet" href="Assist/Config/jqwidgets-ver5.3.2/jqwidgets/styles/jqx.energyblue.css" type="text/css" />
         <script type="text/javascript" src="Assist/Config/jqwidgets-ver5.3.2/jqwidgets/jqxinput.js"></script>
-        <script type="text/javascript" src="Assist/js/main.js"></script>
+        <script type="text/javascript" src="Assist/js/edit.js"></script>
         <title>PHP Blog</title>
     </head>
     <body>
     <center> 
-        <form  action="index.php" method="post" >
-            <input type="text" id="usremail" name="usremail0"/>
-            </br>
-            </br>
-            <input type="password" id="usrpass" name="usrpass0"/>
-            </br>
-            </br>
-            <input type="submit" value="Login"  name = "login" id='login' class='btn'/> 
-            <input type="submit" value="New User" name = "signup" id='signup' class='btn'/>
-            </form>
+        <form  action={$url} method="post" >
+            <h1> Edit your new post here .. </h1>          
+            <input type='text' id='subject' name='subject0' value='{$subject}'/> </br> </br>
+            <textarea id='post' name='post0' >{$post}</textarea> </br>
+            <input type='submit' id='updatepost' name='updatepost0' value="Update"/>
+            <input type='submit' id='deletepost' name='deletepost0' value="Delete"/>
+            </hr>
+        </form>
     </center>
     </body>
 </html>
+
