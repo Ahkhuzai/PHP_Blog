@@ -5,40 +5,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-include('../smarty/libs/Smarty.class.php');
+include('Assist/Config/smarty/libs/Smarty.class.php');
+require_once 'Post.php';
+$smarty = new Smarty; 
+session_start();
 
-// create object
-$smarty = new Smarty;  
-
-$uid=$_GET['id'];
-require '../RedBeanPHP4_3_4/rb.php';
-require 'connect.php';
-R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD); 
-$query= 'SELECT * FROM user WHERE id ="'.$uid.'"';
-$user=R::getRow($query);
-
-$smarty->assign('Name', $user['username']);
-$smarty->assign('url', 'insertNew.php?id='.$uid);
-
-$post= R::getAll( 'SELECT * FROM posts where uid='.$uid );
-$subjects=array();
-$posts=array();
-$ids=array();
-for($i=0;$i<count($post);$i++)
+if(isset($_SESSION['userId']))
 {
-    $subjects[$i]= $post[$i]['subject'];
-    $posts[$i]= $post[$i]['post'];
-	$ids[$i]=$post[$i]['id'];
-}
-$post_data=array();
+    $usrID= $_SESSION['userId'];
+    // create object
 
-for($i=0;$i<count($subjects);$i++)
+    $smarty->assign('url', 'main.php');
+
+
+    $post = new Post(NULL,NULL,Null);
+    $post_data=array();
+    $post_data=$post->loadAllPost($usrID);
+
+    if($post_data)
+        $smarty->assign('posts', $post_data);
+    else 
+        $smarty->assign('msg',"You have not post anything yet"); 
+
+
+    if(isset($_POST['insertNew0']))
+        header ("Location:NewPost.php");
+    if(isset($_POST['EditPost0']))
+        header ("Location:EditPost.php");
+
+    $smarty->display('main.tpl');
+}
+else 
 {
-    $post_data[$i]=array('subject'=>$subjects[$i] , 'post'=>$posts[$i],'url'=>'update.php?pid='.$ids[$i].'&uid='.$uid);
+    $smarty->assign('msg', 'You are not registered! ');
+    $smarty->display('not_register.tpl'); 
 }
-
-$smarty->assign('posts', $post_data);
-
-
-$smarty->display('main.tpl');
 ?>

@@ -1,36 +1,38 @@
 <?php
-include('../smarty/libs/Smarty.class.php');
-
+include('Assist/Config/smarty/libs/Smarty.class.php');
+require 'User.php';
 // create object
-$smarty = new Smarty;            
-       if(isset($_POST['login']))
-       {   
-           $usrname=$_POST['usrname0'];
-           $usrpass= $_POST['usrpass0'];
-           if($usrpass!="" && $usrname!="")
-           {     
-               if($id=validateData($usrname,$usrpass))
-                    header("Location:main.php?id=".$id);
-           }
-           else 
-               echo '<script>alert("Please fill in all required information !")</script>';
-       }
-       else if(isset($_POST['signup']))
-           header("Location: newUser.php");
-       ///////////////////////////////////////////////////////////////
-       function validateData($username , $password)
-       {
-            require '../RedBeanPHP4_3_4/rb.php';
-            require 'connect.php';
-            R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD);
-            $query= 'SELECT * FROM user WHERE username ="'.$username.'"';
-            $user=R::getRow($query);                              
-            if($user['userpassword']==$password)           
-               return $user['id']; 
-            else {
-               echo '<script>alert("username and password combinaation does not match our recored!")</script>';
-               return false;
-            }
-        }       
+$smarty = new Smarty; 
+session_start();
+
+if(isset($_SESSION['userId']))
+    session_destroy();
+if(isset($_POST['login']))
+{
+    if(!empty($_POST['usrpass0']) && !empty($_POST['usremail0']))
+    {
+        $email= $_POST['usremail0'];
+        $password=$_POST['usrpass0'];
+        
+        $user = new User($email,$password);
+        $result=$user->validate($email,$password);
+        
+        if($result)
+        {
+            $_SESSION['userId']= $result;          
+            header("Location:main.php");
+        }
+        else 
+            echo "<script> alert('The email and password combination does not match our records!')</script>";
+        
+    }
+}
+
+if(isset($_POST['signup']))
+{
+    header("Location:signup.php");
+}
+
 $smarty->display('index.tpl');
+
 ?>

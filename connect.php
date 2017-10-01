@@ -5,9 +5,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
+
 $DBUSERNAME="root";
-$DBPASSWORD="root";
-$DBNAME="blog_orm";
+$DBPASSWORD="";
+$DBNAME="blog";
 
+ R::setup( 'mysql:host=localhost;dbname='.$DBNAME, $DBUSERNAME, $DBPASSWORD);
+ 
 ?>
-
