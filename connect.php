@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require 'Assist/Config/RedBeanPHP4_3_4/rb.php';
+require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
 
 $DBUSERNAME="root";
 $DBPASSWORD="";

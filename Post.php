@@ -19,7 +19,7 @@ class Post {
     var $writer_ID; 
     
     function __construct($subject,$content,$uid) {
-        require 'connect.php';   
+        require_once 'connect.php';   
         $this->subject=$subject;
         $this->content=$content;
         $this->writer_ID=$uid;   
@@ -118,12 +118,14 @@ class Post {
             try{
                 $query='UPDATE post SET title="'.$title.'", content="'.$content.'" WHERE id ='.$pid;
                 $r=R::exec( $query );
+          
                 if($r)
                     return $r;   
                 else 
                     return false;
             }catch(Exception $e)
             {
+               
                 return false;
             }
         }

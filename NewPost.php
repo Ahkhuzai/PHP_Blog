@@ -25,11 +25,16 @@ if(isset($_POST['inserNewpost0']))
         echo $title.$content.$usrID."oo";
         $result=$post->addNewPost($title,$content,$usrID);
         if($result)
+        {
             header("Location: main.php");
+        }
     }
     else
         echo "<script>alert('Please fill out all fields')</script>";
 }
+
+if(isset($_POST['back']))
+    header("Location: main.php");
 
 $smarty->display('NewPost.tpl');
 ?>

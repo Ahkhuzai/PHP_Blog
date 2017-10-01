@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2017 at 04:51 PM
+-- Generation Time: Oct 01, 2017 at 10:25 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -21,20 +21,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `blog`
 --
-
---
--- Dumping data for table `post`
---
-
-INSERT INTO `post` (`id`, `title`, `content`, `uid`) VALUES
-(1, 'title', 'content', 1);
-
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `name`) VALUES
 (1, 'ahalkhuzai@gmail.com', '3124', 'Ahlam Alkhuzai');
+
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`id`, `title`, `content`, `uid`) VALUES
+(1, 'title', 'content', 1),
+(2, 'title2', 'content2', 1);
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

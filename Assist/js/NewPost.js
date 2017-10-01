@@ -8,6 +8,11 @@
 $(document).ready(function () {
     $("#inserNewpost").jqxButton({ width: '120px', height: '35px', theme: 'energyblue'});
     });
+    
+$(document).ready(function () {
+    $("#back0").jqxButton({ width: '120px', height: '35px', theme: 'energyblue'});
+    });
+    
 $(document).ready(function () {              
     $("#subject").jqxInput({placeHolder: "Enter post's subject..", height: 25, width: 500, minLength: 1,theme: 'energyblue' });
     });

@@ -3,7 +3,10 @@ include('Assist/Config/smarty/libs/Smarty.class.php');
 require 'User.php';
 // create object
 $smarty = new Smarty; 
+session_start();
 
+if(isset($_SESSION['userId']))
+    session_destroy();
 if(isset($_POST['login']))
 {
     if(!empty($_POST['usrpass0']) && !empty($_POST['usremail0']))
@@ -16,8 +19,7 @@ if(isset($_POST['login']))
         
         if($result)
         {
-            session_start();
-            $_SESSION['userId']= $result;
+            $_SESSION['userId']= $result;          
             header("Location:main.php");
         }
         else 

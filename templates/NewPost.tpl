@@ -24,8 +24,9 @@ and open the template in the editor.
         <form  action="NewPost.php" method="post" >
             <h1> Insert your new post here .. </h1>          
             <input type='text' id='subject' name='subject0'/> </br> </br>
-            <textarea id='post' name='post0' ></textarea> </br>
+            <textarea id='post' name='post0' ></textarea> </br></br>
             <input type='submit' id='inserNewpost' name='inserNewpost0' value='Insert New Post'/>
+             <input type='submit' id='back0' name='back' value='Cancel'/>
             </hr>
         </form>
     </center>

@@ -13,7 +13,7 @@ var $ID;
 
 function __construct($usremail,$usrpass)
 {
-    require 'connect.php';
+    require_once  'connect.php';
     $this->Email=$usremail; 
     $this->Password=$usrpass; 
 }

@@ -24,9 +24,11 @@ and open the template in the editor.
         <form  action={$url} method="post" >
             <h1> Edit your new post here .. </h1>          
             <input type='text' id='subject' name='subject0' value='{$subject}'/> </br> </br>
-            <textarea id='post' name='post0' >{$post}</textarea> </br>
+            <textarea id='post' name='post0' >{$post}</textarea> </br></br>
             <input type='submit' id='updatepost' name='updatepost0' value="Update"/>
             <input type='submit' id='deletepost' name='deletepost0' value="Delete"/>
+            </br></br>
+                <input type='submit' id='back0' name='back' value='Cancel'/>
             </hr>
         </form>
     </center>

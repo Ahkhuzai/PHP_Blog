@@ -39,6 +39,8 @@ if(isset($_POST['updatepost0']))
         $result=$post->update($title,$content,$pid);
         if($result)
             header("Location:main.php");
+        else if($result===false)
+           echo '<script>alert("You did not make any changes!")</script>'; 
     }
     else 
         echo '<script>alert("Please fill all fields!")</script>'; 
@@ -49,6 +51,9 @@ if(isset($_POST['deletepost0']))
     if($result)
        header("Location:main.php");
 }
+
+if(isset($_POST['back']))
+    header("Location: main.php");
 
 $smarty->display('edit.tpl');
 ?>

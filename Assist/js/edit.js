@@ -17,3 +17,7 @@ $(document).ready(function () {
 $(document).ready(function () {              
     $("#post").jqxInput({width: 500, height: 300, placeHolder: 'Enter a post...',theme: 'energyblue' });
     });
+    
+$(document).ready(function () {
+    $("#back0").jqxButton({ width: '120px', height: '35px', theme: 'energyblue'});
+    });
